@@ -14,6 +14,9 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TherapistHomeRouteImport } from './routes/therapist.home'
+import { Route as ParentHomeRouteImport } from './routes/parent.home'
+import { Route as DoctorHomeRouteImport } from './routes/doctor.home'
 import { Route as ApiProxySplatRouteImport } from './routes/api/proxy.$'
 
 const UnauthorizedRoute = UnauthorizedRouteImport.update({
@@ -41,6 +44,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TherapistHomeRoute = TherapistHomeRouteImport.update({
+  id: '/therapist/home',
+  path: '/therapist/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentHomeRoute = ParentHomeRouteImport.update({
+  id: '/parent/home',
+  path: '/parent/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DoctorHomeRoute = DoctorHomeRouteImport.update({
+  id: '/doctor/home',
+  path: '/doctor/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiProxySplatRoute = ApiProxySplatRouteImport.update({
   id: '/api/proxy/$',
   path: '/api/proxy/$',
@@ -53,6 +71,9 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/doctor/home': typeof DoctorHomeRoute
+  '/parent/home': typeof ParentHomeRoute
+  '/therapist/home': typeof TherapistHomeRoute
   '/api/proxy/$': typeof ApiProxySplatRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +82,9 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/doctor/home': typeof DoctorHomeRoute
+  '/parent/home': typeof ParentHomeRoute
+  '/therapist/home': typeof TherapistHomeRoute
   '/api/proxy/$': typeof ApiProxySplatRoute
 }
 export interface FileRoutesById {
@@ -70,6 +94,9 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/doctor/home': typeof DoctorHomeRoute
+  '/parent/home': typeof ParentHomeRoute
+  '/therapist/home': typeof TherapistHomeRoute
   '/api/proxy/$': typeof ApiProxySplatRoute
 }
 export interface FileRouteTypes {
@@ -80,9 +107,21 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/unauthorized'
+    | '/doctor/home'
+    | '/parent/home'
+    | '/therapist/home'
     | '/api/proxy/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/login' | '/signup' | '/unauthorized' | '/api/proxy/$'
+  to:
+    | '/'
+    | '/about'
+    | '/login'
+    | '/signup'
+    | '/unauthorized'
+    | '/doctor/home'
+    | '/parent/home'
+    | '/therapist/home'
+    | '/api/proxy/$'
   id:
     | '__root__'
     | '/'
@@ -90,6 +129,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/unauthorized'
+    | '/doctor/home'
+    | '/parent/home'
+    | '/therapist/home'
     | '/api/proxy/$'
   fileRoutesById: FileRoutesById
 }
@@ -99,6 +141,9 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
+  DoctorHomeRoute: typeof DoctorHomeRoute
+  ParentHomeRoute: typeof ParentHomeRoute
+  TherapistHomeRoute: typeof TherapistHomeRoute
   ApiProxySplatRoute: typeof ApiProxySplatRoute
 }
 
@@ -139,6 +184,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/therapist/home': {
+      id: '/therapist/home'
+      path: '/therapist/home'
+      fullPath: '/therapist/home'
+      preLoaderRoute: typeof TherapistHomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent/home': {
+      id: '/parent/home'
+      path: '/parent/home'
+      fullPath: '/parent/home'
+      preLoaderRoute: typeof ParentHomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/doctor/home': {
+      id: '/doctor/home'
+      path: '/doctor/home'
+      fullPath: '/doctor/home'
+      preLoaderRoute: typeof DoctorHomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/proxy/$': {
       id: '/api/proxy/$'
       path: '/api/proxy/$'
@@ -155,8 +221,21 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
   UnauthorizedRoute: UnauthorizedRoute,
+  DoctorHomeRoute: DoctorHomeRoute,
+  ParentHomeRoute: ParentHomeRoute,
+  TherapistHomeRoute: TherapistHomeRoute,
   ApiProxySplatRoute: ApiProxySplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
