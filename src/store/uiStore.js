@@ -1,4 +1,6 @@
 import { create } from 'zustand'
+import { toast as sonnerToast } from 'sonner'
+
 
 const THEME_STORAGE_KEY = 'auticare-theme'
 
@@ -52,18 +54,14 @@ export const useUIStore = create((set) => ({
   
   // Toast messages
   toasts: [],
-  addToast: (toast) =>
-    set((state) => ({
-      toasts: [
-        {
-          id: Date.now(),
-          type: 'info',
-          duration: 3000,
-          ...toast,
-        },
-        ...state.toasts,
-      ],
-    })),
+  addToast: (toast) => {
+    const t = { id: Date.now(), type: 'info', duration: 3000, ...toast }
+    const msg = t.title || t.message || ''
+    const desc = t.title && t.message ? t.message : undefined
+    const fn = sonnerToast[t.type] || sonnerToast
+    fn(msg, { description: desc, duration: t.duration })
+    set((state) => ({ toasts: [t, ...state.toasts] }))
+  },
   removeToast: (id) =>
     set((state) => ({
       toasts: state.toasts.filter((t) => t.id !== id),
