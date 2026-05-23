@@ -19,10 +19,10 @@ function sanitizeBaseUrl(url) {
   return sanitized
 }
 
-const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://auticare-production-828c.up.railway.app'
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || '/api/proxy'
 
 export const config = {
-  // API base URL — always sanitized to strip trailing /api or /
+  // API base URL — defaults to same-origin proxy at /api/proxy to avoid CORS
   apiBaseUrl: sanitizeBaseUrl(rawBaseUrl),
 
   // AI API URL (HuggingFace space)
