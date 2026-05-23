@@ -25,13 +25,13 @@ export default function PublicFooter() {
             <p className="text-sm font-semibold text-[var(--ink)] mb-3">Contact</p>
             <div className="space-y-2 text-sm text-[var(--muted)]">
               <p className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-emerald-500" /> support@auticare.com
+                <Mail className="h-4 w-4 text-emerald-500" /><span>support@auticare.com</span>
               </p>
               <p className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-emerald-500" /> (800) 555-1212
+                <Phone className="h-4 w-4 text-emerald-500" /><span>(800) 555-1212</span>
               </p>
               <p className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-emerald-500" /> Remote-first care network
+                <MapPin className="h-4 w-4 text-emerald-500" /><span>Remote-first care network</span>
               </p>
             </div>
           </div>
