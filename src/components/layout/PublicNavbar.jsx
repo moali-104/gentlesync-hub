@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from '@/lib/router-compat'
 import { Menu, X, ArrowRight } from 'lucide-react'
 import { useUIStore } from '../../store/uiStore'
 import { useAuthStore } from '../../store/authStore'

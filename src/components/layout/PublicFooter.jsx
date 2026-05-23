@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from '@/lib/router-compat'
 import { Mail, Phone, MapPin } from 'lucide-react'
 
 export default function PublicFooter() {

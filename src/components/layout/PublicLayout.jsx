@@ -1,4 +1,4 @@
-﻿import { Outlet } from 'react-router-dom'
+﻿import { Outlet } from '@/lib/router-compat'
 import PublicNavbar from './PublicNavbar'
 import PublicFooter from './PublicFooter'
 

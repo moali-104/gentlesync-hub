@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate, useSearchParams } from '@/lib/router-compat'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import {
@@ -14,7 +14,7 @@ import {
   User,
   Users,
 } from 'lucide-react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/Card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/auticare-ui/Card'
 import { USER_ROLES } from '../../utils/constants'
 import usePageTitle from '../../utils/usePageTitle'
 import { signupSchema } from '../../utils/validators'
