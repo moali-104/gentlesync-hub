@@ -1,11 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import PlaceholderPage from "@/components/shared/PlaceholderPage";
+import SpecialistDashboard from "@/features/specialist/SpecialistDashboard";
 
 export const Route = createFileRoute("/therapist/home")({
-  head: () => ({ meta: [{ title: "Therapist Home — AutiCare" }] }),
-  component: () => (
-    <div className="min-h-screen bg-[var(--surface)] py-16 px-4">
-      <PlaceholderPage title="Therapist Dashboard" description="Coming in Phase 2." />
-    </div>
-  ),
+  head: () => ({ meta: [{ title: "Therapist Dashboard — AutiCare" }] }),
+  component: () => <SpecialistDashboard role="Therapist" />,
 });
