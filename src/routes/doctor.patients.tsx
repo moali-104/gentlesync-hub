@@ -11,7 +11,7 @@ const doctorNav = [
 
 // Backend may expose patients via dashboard payload (`patients` array) or a dedicated endpoint.
 const fetchPatients = async () => {
-  const d = await getSpecialistDashboard().catch(() => null);
+  const d: any = await getSpecialistDashboard().catch(() => null);
   return d?.patients ?? d?.children ?? d?.recentPatients ?? [];
 };
 

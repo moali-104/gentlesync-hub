@@ -10,7 +10,7 @@ const therapistNav = [
 ];
 
 const fetchPatients = async () => {
-  const d = await getSpecialistDashboard().catch(() => null);
+  const d: any = await getSpecialistDashboard().catch(() => null);
   return d?.patients ?? d?.children ?? d?.recentPatients ?? [];
 };
 
