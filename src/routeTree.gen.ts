@@ -14,11 +14,17 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TherapistSessionsRouteImport } from './routes/therapist.sessions'
+import { Route as TherapistPatientsRouteImport } from './routes/therapist.patients'
+import { Route as TherapistNotesRouteImport } from './routes/therapist.notes'
 import { Route as TherapistHomeRouteImport } from './routes/therapist.home'
 import { Route as ParentSessionsRouteImport } from './routes/parent.sessions'
 import { Route as ParentNotesRouteImport } from './routes/parent.notes'
 import { Route as ParentHomeRouteImport } from './routes/parent.home'
 import { Route as ParentChildrenRouteImport } from './routes/parent.children'
+import { Route as DoctorSessionsRouteImport } from './routes/doctor.sessions'
+import { Route as DoctorPatientsRouteImport } from './routes/doctor.patients'
+import { Route as DoctorNotesRouteImport } from './routes/doctor.notes'
 import { Route as DoctorHomeRouteImport } from './routes/doctor.home'
 import { Route as ApiProxySplatRouteImport } from './routes/api/proxy.$'
 
@@ -47,6 +53,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TherapistSessionsRoute = TherapistSessionsRouteImport.update({
+  id: '/therapist/sessions',
+  path: '/therapist/sessions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TherapistPatientsRoute = TherapistPatientsRouteImport.update({
+  id: '/therapist/patients',
+  path: '/therapist/patients',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TherapistNotesRoute = TherapistNotesRouteImport.update({
+  id: '/therapist/notes',
+  path: '/therapist/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TherapistHomeRoute = TherapistHomeRouteImport.update({
   id: '/therapist/home',
   path: '/therapist/home',
@@ -72,6 +93,21 @@ const ParentChildrenRoute = ParentChildrenRouteImport.update({
   path: '/parent/children',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DoctorSessionsRoute = DoctorSessionsRouteImport.update({
+  id: '/doctor/sessions',
+  path: '/doctor/sessions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DoctorPatientsRoute = DoctorPatientsRouteImport.update({
+  id: '/doctor/patients',
+  path: '/doctor/patients',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DoctorNotesRoute = DoctorNotesRouteImport.update({
+  id: '/doctor/notes',
+  path: '/doctor/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DoctorHomeRoute = DoctorHomeRouteImport.update({
   id: '/doctor/home',
   path: '/doctor/home',
@@ -90,11 +126,17 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/doctor/home': typeof DoctorHomeRoute
+  '/doctor/notes': typeof DoctorNotesRoute
+  '/doctor/patients': typeof DoctorPatientsRoute
+  '/doctor/sessions': typeof DoctorSessionsRoute
   '/parent/children': typeof ParentChildrenRoute
   '/parent/home': typeof ParentHomeRoute
   '/parent/notes': typeof ParentNotesRoute
   '/parent/sessions': typeof ParentSessionsRoute
   '/therapist/home': typeof TherapistHomeRoute
+  '/therapist/notes': typeof TherapistNotesRoute
+  '/therapist/patients': typeof TherapistPatientsRoute
+  '/therapist/sessions': typeof TherapistSessionsRoute
   '/api/proxy/$': typeof ApiProxySplatRoute
 }
 export interface FileRoutesByTo {
@@ -104,11 +146,17 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/doctor/home': typeof DoctorHomeRoute
+  '/doctor/notes': typeof DoctorNotesRoute
+  '/doctor/patients': typeof DoctorPatientsRoute
+  '/doctor/sessions': typeof DoctorSessionsRoute
   '/parent/children': typeof ParentChildrenRoute
   '/parent/home': typeof ParentHomeRoute
   '/parent/notes': typeof ParentNotesRoute
   '/parent/sessions': typeof ParentSessionsRoute
   '/therapist/home': typeof TherapistHomeRoute
+  '/therapist/notes': typeof TherapistNotesRoute
+  '/therapist/patients': typeof TherapistPatientsRoute
+  '/therapist/sessions': typeof TherapistSessionsRoute
   '/api/proxy/$': typeof ApiProxySplatRoute
 }
 export interface FileRoutesById {
@@ -119,11 +167,17 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/doctor/home': typeof DoctorHomeRoute
+  '/doctor/notes': typeof DoctorNotesRoute
+  '/doctor/patients': typeof DoctorPatientsRoute
+  '/doctor/sessions': typeof DoctorSessionsRoute
   '/parent/children': typeof ParentChildrenRoute
   '/parent/home': typeof ParentHomeRoute
   '/parent/notes': typeof ParentNotesRoute
   '/parent/sessions': typeof ParentSessionsRoute
   '/therapist/home': typeof TherapistHomeRoute
+  '/therapist/notes': typeof TherapistNotesRoute
+  '/therapist/patients': typeof TherapistPatientsRoute
+  '/therapist/sessions': typeof TherapistSessionsRoute
   '/api/proxy/$': typeof ApiProxySplatRoute
 }
 export interface FileRouteTypes {
@@ -135,11 +189,17 @@ export interface FileRouteTypes {
     | '/signup'
     | '/unauthorized'
     | '/doctor/home'
+    | '/doctor/notes'
+    | '/doctor/patients'
+    | '/doctor/sessions'
     | '/parent/children'
     | '/parent/home'
     | '/parent/notes'
     | '/parent/sessions'
     | '/therapist/home'
+    | '/therapist/notes'
+    | '/therapist/patients'
+    | '/therapist/sessions'
     | '/api/proxy/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -149,11 +209,17 @@ export interface FileRouteTypes {
     | '/signup'
     | '/unauthorized'
     | '/doctor/home'
+    | '/doctor/notes'
+    | '/doctor/patients'
+    | '/doctor/sessions'
     | '/parent/children'
     | '/parent/home'
     | '/parent/notes'
     | '/parent/sessions'
     | '/therapist/home'
+    | '/therapist/notes'
+    | '/therapist/patients'
+    | '/therapist/sessions'
     | '/api/proxy/$'
   id:
     | '__root__'
@@ -163,11 +229,17 @@ export interface FileRouteTypes {
     | '/signup'
     | '/unauthorized'
     | '/doctor/home'
+    | '/doctor/notes'
+    | '/doctor/patients'
+    | '/doctor/sessions'
     | '/parent/children'
     | '/parent/home'
     | '/parent/notes'
     | '/parent/sessions'
     | '/therapist/home'
+    | '/therapist/notes'
+    | '/therapist/patients'
+    | '/therapist/sessions'
     | '/api/proxy/$'
   fileRoutesById: FileRoutesById
 }
@@ -178,11 +250,17 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
   DoctorHomeRoute: typeof DoctorHomeRoute
+  DoctorNotesRoute: typeof DoctorNotesRoute
+  DoctorPatientsRoute: typeof DoctorPatientsRoute
+  DoctorSessionsRoute: typeof DoctorSessionsRoute
   ParentChildrenRoute: typeof ParentChildrenRoute
   ParentHomeRoute: typeof ParentHomeRoute
   ParentNotesRoute: typeof ParentNotesRoute
   ParentSessionsRoute: typeof ParentSessionsRoute
   TherapistHomeRoute: typeof TherapistHomeRoute
+  TherapistNotesRoute: typeof TherapistNotesRoute
+  TherapistPatientsRoute: typeof TherapistPatientsRoute
+  TherapistSessionsRoute: typeof TherapistSessionsRoute
   ApiProxySplatRoute: typeof ApiProxySplatRoute
 }
 
@@ -223,6 +301,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/therapist/sessions': {
+      id: '/therapist/sessions'
+      path: '/therapist/sessions'
+      fullPath: '/therapist/sessions'
+      preLoaderRoute: typeof TherapistSessionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/therapist/patients': {
+      id: '/therapist/patients'
+      path: '/therapist/patients'
+      fullPath: '/therapist/patients'
+      preLoaderRoute: typeof TherapistPatientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/therapist/notes': {
+      id: '/therapist/notes'
+      path: '/therapist/notes'
+      fullPath: '/therapist/notes'
+      preLoaderRoute: typeof TherapistNotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/therapist/home': {
       id: '/therapist/home'
       path: '/therapist/home'
@@ -258,6 +357,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentChildrenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/doctor/sessions': {
+      id: '/doctor/sessions'
+      path: '/doctor/sessions'
+      fullPath: '/doctor/sessions'
+      preLoaderRoute: typeof DoctorSessionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/doctor/patients': {
+      id: '/doctor/patients'
+      path: '/doctor/patients'
+      fullPath: '/doctor/patients'
+      preLoaderRoute: typeof DoctorPatientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/doctor/notes': {
+      id: '/doctor/notes'
+      path: '/doctor/notes'
+      fullPath: '/doctor/notes'
+      preLoaderRoute: typeof DoctorNotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/doctor/home': {
       id: '/doctor/home'
       path: '/doctor/home'
@@ -282,13 +402,29 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   UnauthorizedRoute: UnauthorizedRoute,
   DoctorHomeRoute: DoctorHomeRoute,
+  DoctorNotesRoute: DoctorNotesRoute,
+  DoctorPatientsRoute: DoctorPatientsRoute,
+  DoctorSessionsRoute: DoctorSessionsRoute,
   ParentChildrenRoute: ParentChildrenRoute,
   ParentHomeRoute: ParentHomeRoute,
   ParentNotesRoute: ParentNotesRoute,
   ParentSessionsRoute: ParentSessionsRoute,
   TherapistHomeRoute: TherapistHomeRoute,
+  TherapistNotesRoute: TherapistNotesRoute,
+  TherapistPatientsRoute: TherapistPatientsRoute,
+  TherapistSessionsRoute: TherapistSessionsRoute,
   ApiProxySplatRoute: ApiProxySplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
