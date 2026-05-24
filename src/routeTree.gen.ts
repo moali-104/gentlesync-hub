@@ -15,7 +15,10 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TherapistHomeRouteImport } from './routes/therapist.home'
+import { Route as ParentSessionsRouteImport } from './routes/parent.sessions'
+import { Route as ParentNotesRouteImport } from './routes/parent.notes'
 import { Route as ParentHomeRouteImport } from './routes/parent.home'
+import { Route as ParentChildrenRouteImport } from './routes/parent.children'
 import { Route as DoctorHomeRouteImport } from './routes/doctor.home'
 import { Route as ApiProxySplatRouteImport } from './routes/api/proxy.$'
 
@@ -49,9 +52,24 @@ const TherapistHomeRoute = TherapistHomeRouteImport.update({
   path: '/therapist/home',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ParentSessionsRoute = ParentSessionsRouteImport.update({
+  id: '/parent/sessions',
+  path: '/parent/sessions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentNotesRoute = ParentNotesRouteImport.update({
+  id: '/parent/notes',
+  path: '/parent/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ParentHomeRoute = ParentHomeRouteImport.update({
   id: '/parent/home',
   path: '/parent/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentChildrenRoute = ParentChildrenRouteImport.update({
+  id: '/parent/children',
+  path: '/parent/children',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DoctorHomeRoute = DoctorHomeRouteImport.update({
@@ -72,7 +90,10 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/doctor/home': typeof DoctorHomeRoute
+  '/parent/children': typeof ParentChildrenRoute
   '/parent/home': typeof ParentHomeRoute
+  '/parent/notes': typeof ParentNotesRoute
+  '/parent/sessions': typeof ParentSessionsRoute
   '/therapist/home': typeof TherapistHomeRoute
   '/api/proxy/$': typeof ApiProxySplatRoute
 }
@@ -83,7 +104,10 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/doctor/home': typeof DoctorHomeRoute
+  '/parent/children': typeof ParentChildrenRoute
   '/parent/home': typeof ParentHomeRoute
+  '/parent/notes': typeof ParentNotesRoute
+  '/parent/sessions': typeof ParentSessionsRoute
   '/therapist/home': typeof TherapistHomeRoute
   '/api/proxy/$': typeof ApiProxySplatRoute
 }
@@ -95,7 +119,10 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/doctor/home': typeof DoctorHomeRoute
+  '/parent/children': typeof ParentChildrenRoute
   '/parent/home': typeof ParentHomeRoute
+  '/parent/notes': typeof ParentNotesRoute
+  '/parent/sessions': typeof ParentSessionsRoute
   '/therapist/home': typeof TherapistHomeRoute
   '/api/proxy/$': typeof ApiProxySplatRoute
 }
@@ -108,7 +135,10 @@ export interface FileRouteTypes {
     | '/signup'
     | '/unauthorized'
     | '/doctor/home'
+    | '/parent/children'
     | '/parent/home'
+    | '/parent/notes'
+    | '/parent/sessions'
     | '/therapist/home'
     | '/api/proxy/$'
   fileRoutesByTo: FileRoutesByTo
@@ -119,7 +149,10 @@ export interface FileRouteTypes {
     | '/signup'
     | '/unauthorized'
     | '/doctor/home'
+    | '/parent/children'
     | '/parent/home'
+    | '/parent/notes'
+    | '/parent/sessions'
     | '/therapist/home'
     | '/api/proxy/$'
   id:
@@ -130,7 +163,10 @@ export interface FileRouteTypes {
     | '/signup'
     | '/unauthorized'
     | '/doctor/home'
+    | '/parent/children'
     | '/parent/home'
+    | '/parent/notes'
+    | '/parent/sessions'
     | '/therapist/home'
     | '/api/proxy/$'
   fileRoutesById: FileRoutesById
@@ -142,7 +178,10 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
   DoctorHomeRoute: typeof DoctorHomeRoute
+  ParentChildrenRoute: typeof ParentChildrenRoute
   ParentHomeRoute: typeof ParentHomeRoute
+  ParentNotesRoute: typeof ParentNotesRoute
+  ParentSessionsRoute: typeof ParentSessionsRoute
   TherapistHomeRoute: typeof TherapistHomeRoute
   ApiProxySplatRoute: typeof ApiProxySplatRoute
 }
@@ -191,11 +230,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TherapistHomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/parent/sessions': {
+      id: '/parent/sessions'
+      path: '/parent/sessions'
+      fullPath: '/parent/sessions'
+      preLoaderRoute: typeof ParentSessionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent/notes': {
+      id: '/parent/notes'
+      path: '/parent/notes'
+      fullPath: '/parent/notes'
+      preLoaderRoute: typeof ParentNotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/parent/home': {
       id: '/parent/home'
       path: '/parent/home'
       fullPath: '/parent/home'
       preLoaderRoute: typeof ParentHomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent/children': {
+      id: '/parent/children'
+      path: '/parent/children'
+      fullPath: '/parent/children'
+      preLoaderRoute: typeof ParentChildrenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/doctor/home': {
@@ -222,10 +282,23 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   UnauthorizedRoute: UnauthorizedRoute,
   DoctorHomeRoute: DoctorHomeRoute,
+  ParentChildrenRoute: ParentChildrenRoute,
   ParentHomeRoute: ParentHomeRoute,
+  ParentNotesRoute: ParentNotesRoute,
+  ParentSessionsRoute: ParentSessionsRoute,
   TherapistHomeRoute: TherapistHomeRoute,
   ApiProxySplatRoute: ApiProxySplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
